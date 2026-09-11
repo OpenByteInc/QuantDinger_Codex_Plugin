@@ -1,0 +1,72 @@
+{
+  "name": "quantdinger",
+  "version": "0.1.0",
+  "description": "AI trading research and strategy backtesting for US stocks, Hong Kong stocks, ETFs, and crypto. Turn ideas into strategies, compare returns and drawdowns, and monitor positions in QuantDinger.",
+  "author": {
+    "name": "Open Byte Inc",
+    "email": "support@quantdinger.com",
+    "url": "https://www.quantdinger.com"
+  },
+  "homepage": "https://www.quantdinger.com",
+  "repository": "https://github.com/OpenByteInc/quantdinger-codex-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "quantdinger",
+    "ai trading",
+    "quantitative trading",
+    "algorithmic trading",
+    "backtesting",
+    "backtest",
+    "trading strategy",
+    "technical analysis",
+    "crypto",
+    "bitcoin",
+    "btc",
+    "ethereum",
+    "eth",
+    "stocks",
+    "etf",
+    "moving average",
+    "rsi",
+    "paper trading",
+    "portfolio monitoring",
+    "drawdown",
+    "量化交易",
+    "策略回测",
+    "比特币",
+    "股票分析",
+    "模拟交易",
+    "US stocks",
+    "Hong Kong stocks",
+    "美股",
+    "港股"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "QuantDinger: AI Trading & Backtesting",
+    "shortDescription": "Test trading ideas across US stocks, Hong Kong, ETFs, and crypto.",
+    "longDescription": "Have a trading idea? Put it to the test. Describe it in plain language and QuantDinger helps you build a strategy, run a historical backtest, and understand what drove the results.\n\nResearch US stocks, Hong Kong stocks, ETFs, and cryptocurrencies such as Bitcoin and Ethereum. Explore moving averages, RSI, and other technical indicators. Compare strategy versions by return, maximum drawdown, trade count, and transaction costs before deciding what to test next.\n\nKeep your workflow in one conversation: save strategy code, review positions and P&L, and inspect open orders. Start with research and backtesting, then use paper trading or supported live trading with your explicit confirmation.\n\nTry it: backtest an NVDA moving-average strategy, analyze Tencent in Hong Kong, or compare BTC strategies with fees included. Requires a QuantDinger account and Agent Token; this package supports Windows x64. Market and trading access depend on your connected service and permissions. Historical results do not guarantee future performance.",
+    "developerName": "Open Byte Inc",
+    "category": "Finance",
+    "capabilities": [
+      "US, Hong Kong & crypto research",
+      "AI strategy building",
+      "Backtesting & comparison",
+      "Positions & P&L monitoring"
+    ],
+    "defaultPrompt": [
+      "Backtest an NVDA MA20/MA60 strategy over 90 days, including fees.",
+      "Analyze Tencent (0700.HK) over 90 days: trend, volume, and risks.",
+      "Compare BTC moving-average and RSI strategies over 90 days."
+    ],
+    "brandColor": "#1DA8FF",
+    "websiteURL": "https://www.quantdinger.com",
+    "composerIcon": "./assets/quantdinger-cat-logo.png",
+    "logo": "./assets/quantdinger-cat-logo.png",
+    "logoDark": "./assets/quantdinger-cat-logo.png",
+    "screenshots": [
+      "./assets/strategy-workflow.png"
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}

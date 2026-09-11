@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+!.env.example
+dist/
+outputs/
+.DS_Store
+Thumbs.db
+Microsoft/
+config.json
+*.log
+*.pem
+*.key

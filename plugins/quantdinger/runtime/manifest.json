@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "platform": "win-x64",
+  "runtime_id": "win-x64-py3.13.15-mcp0.6.2-c99f6f4a2cec2512",
+  "archive": "quantdinger-runtime-win-x64.zip",
+  "sha256": "c99f6f4a2cec25124244e325edd270576665491cf825fd94688e33210cbfafec",
+  "size_bytes": 26381651,
+  "inventory_sha256": "afffe6f9412aac043a825451a682c795f66d55e6db43c0dc04959858668a48c2",
+  "python_version": "3.13.15",
+  "mcp_version": "0.6.2"
+}

@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "quantdinger": {
+      "command": "cmd.exe",
+      "args": [
+        "/d",
+        "/s",
+        "/c",
+        "call",
+        ".\\scripts\\launch-quantdinger.cmd"
+      ],
+      "cwd": ".",
+      "env_vars": [
+        "QUANTDINGER_AGENT_TOKEN",
+        "QUANTDINGER_BASE_URL"
+      ],
+      "startup_timeout_sec": 180,
+      "default_tools_approval_mode": "writes"
+    }
+  }
+}

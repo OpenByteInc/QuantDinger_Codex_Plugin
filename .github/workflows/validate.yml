@@ -1,0 +1,29 @@
+name: Validate plugin
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    name: Windows distribution and connector
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Validate repository
+        run: python scripts/validate_repository.py
+      - name: Run isolated connector and bundle tests
+        shell: pwsh
+        run: |
+          $qdRuntime = & ./plugins/quantdinger/scripts/install-connector.ps1 -PrintRuntime
+          if ($LASTEXITCODE -and $LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & "$qdRuntime/python/python.exe" -I -m unittest discover -s plugins/quantdinger/tests -p "test_*.py" -v
+          exit $LASTEXITCODE
