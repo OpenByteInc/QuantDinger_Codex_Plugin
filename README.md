@@ -3,7 +3,7 @@
 ![QuantDinger — your trading research desk inside Codex](docs/assets/hero-en.svg)
 
 <p align="center">
-  <a href="https://github.com/OpenByteInc/quantdinger-codex-plugin/actions/workflows/validate.yml"><img src="https://github.com/OpenByteInc/quantdinger-codex-plugin/actions/workflows/validate.yml/badge.svg" alt="Build and tests" /></a>
+  <a href="https://github.com/OpenByteInc/QuantDinger_Codex_Plugin/actions/workflows/validate.yml"><img src="https://github.com/OpenByteInc/QuantDinger_Codex_Plugin/actions/workflows/validate.yml/badge.svg" alt="Build and tests" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-b5f36e?style=flat-square" alt="Apache 2.0" /></a>
   <img src="https://img.shields.io/badge/plugin-0.2.0-253c4c?style=flat-square" alt="Plugin 0.2.0" />
   <img src="https://img.shields.io/badge/Windows_+_macOS-available-253c4c?style=flat-square" alt="Windows and macOS" />
@@ -22,7 +22,7 @@ You need a plugin-capable Codex client, Git, and a terminal where `codex --versi
 ### Windows · PowerShell
 
 ```powershell
-codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
+codex plugin marketplace add OpenByteInc/QuantDinger_Codex_Plugin
 codex plugin add quantdinger@quantdinger
 ```
 
@@ -39,7 +39,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 Then install the Mac plugin:
 
 ```bash
-codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
+codex plugin marketplace add OpenByteInc/QuantDinger_Codex_Plugin
 codex plugin add quantdinger-macos@quantdinger
 ```
 
@@ -95,7 +95,7 @@ Codex checks and saves the strategy, submits the backtest, waits for completion,
 Your Codex → Local QuantDinger plugin → Your QuantDinger backend
 ```
 
-**[Installation, self-hosting, updates & troubleshooting →](docs/INSTALL.md)** · **[Report an issue →](https://github.com/OpenByteInc/quantdinger-codex-plugin/issues)**
+**[Installation, self-hosting, updates & troubleshooting →](docs/INSTALL.md)** · **[Report an issue →](https://github.com/OpenByteInc/QuantDinger_Codex_Plugin/issues)**
 
 <details>
 <summary>Costs, data and permissions</summary>

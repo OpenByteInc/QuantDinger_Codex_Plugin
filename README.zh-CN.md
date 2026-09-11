@@ -3,7 +3,7 @@
 ![QuantDinger：把交易想法变成可以验证的策略](docs/assets/hero-zh.svg)
 
 <p align="center">
-  <a href="https://github.com/OpenByteInc/quantdinger-codex-plugin/actions/workflows/validate.yml"><img src="https://github.com/OpenByteInc/quantdinger-codex-plugin/actions/workflows/validate.yml/badge.svg" alt="构建与测试" /></a>
+  <a href="https://github.com/OpenByteInc/QuantDinger_Codex_Plugin/actions/workflows/validate.yml"><img src="https://github.com/OpenByteInc/QuantDinger_Codex_Plugin/actions/workflows/validate.yml/badge.svg" alt="构建与测试" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-b5f36e?style=flat-square" alt="Apache 2.0" /></a>
   <img src="https://img.shields.io/badge/plugin-0.2.0-253c4c?style=flat-square" alt="插件 0.2.0" />
   <img src="https://img.shields.io/badge/Windows_+_macOS-available-253c4c?style=flat-square" alt="Windows 与 macOS" />
@@ -22,7 +22,7 @@
 ### Windows · 打开 PowerShell
 
 ```powershell
-codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
+codex plugin marketplace add OpenByteInc/QuantDinger_Codex_Plugin
 codex plugin add quantdinger@quantdinger
 ```
 
@@ -39,7 +39,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 然后安装 Mac 插件：
 
 ```bash
-codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
+codex plugin marketplace add OpenByteInc/QuantDinger_Codex_Plugin
 codex plugin add quantdinger-macos@quantdinger
 ```
 
@@ -95,7 +95,7 @@ Codex 会检查并保存策略、提交回测、等待完成，再解释结果�
 你的 Codex → 本地 QuantDinger 插件 → 你的 QuantDinger 后端
 ```
 
-**[完整安装、自托管、更新与排错教程 →](docs/INSTALL.zh-CN.md)** · **[反馈问题 →](https://github.com/OpenByteInc/quantdinger-codex-plugin/issues)**
+**[完整安装、自托管、更新与排错教程 →](docs/INSTALL.zh-CN.md)** · **[反馈问题 →](https://github.com/OpenByteInc/QuantDinger_Codex_Plugin/issues)**
 
 <details>
 <summary>费用、数据与权限说明</summary>

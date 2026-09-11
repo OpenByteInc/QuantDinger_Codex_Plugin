@@ -4,10 +4,10 @@ Research US stocks, Hong Kong stocks, ETFs and crypto; build strategies, run bac
 
 This folder is the installable Windows x64 plugin, version 0.2.0. It includes quantdinger-mcp 0.6.2, Python 3.13.15, a credential connector and four workflow skills. Mac users should install `quantdinger-macos@quantdinger` from the same marketplace.
 
-- [English installation and usage guide](https://github.com/OpenByteInc/quantdinger-codex-plugin#readme)
-- [简体中文安装与使用说明](https://github.com/OpenByteInc/quantdinger-codex-plugin/blob/main/README.zh-CN.md)
+- [English installation and usage guide](https://github.com/OpenByteInc/QuantDinger_Codex_Plugin#readme)
+- [简体中文安装与使用说明](https://github.com/OpenByteInc/QuantDinger_Codex_Plugin/blob/main/README.zh-CN.md)
 - [Build the runtime](BUILDING.md)
-- [Security and credential handling](https://github.com/OpenByteInc/quantdinger-codex-plugin/blob/main/SECURITY.md)
+- [Security and credential handling](https://github.com/OpenByteInc/QuantDinger_Codex_Plugin/blob/main/SECURITY.md)
 
 Default backend: `https://ai.quantdinger.com`. Supply your own scoped Agent Token through the connection tool, or run `scripts/launch-quantdinger.cmd configure` for a masked terminal prompt. Tokens supplied in chat are present in conversation/tool history; the connector stores its local copy in the OS credential vault.
 

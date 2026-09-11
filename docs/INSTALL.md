@@ -19,7 +19,7 @@ If a command is missing, install [Git](https://git-scm.com/downloads) or the [Co
 Windows 10/11 x64. Paste these commands into **PowerShell**:
 
 ```powershell
-codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
+codex plugin marketplace add OpenByteInc/QuantDinger_Codex_Plugin
 codex plugin add quantdinger@quantdinger
 ```
 
@@ -36,7 +36,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 If you already use Homebrew, `brew install uv` is an alternative. You only need one installation method. The launcher checks the standard uv and Homebrew locations as well as `PATH`.
 
 ```bash
-codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
+codex plugin marketplace add OpenByteInc/QuantDinger_Codex_Plugin
 codex plugin add quantdinger-macos@quantdinger
 ```
 
@@ -77,8 +77,8 @@ Local tokens use Windows Credential Manager or macOS Keychain. On Mac, allow a K
 Use a local checkout and the masked terminal prompt instead:
 
 ```text
-git clone https://github.com/OpenByteInc/quantdinger-codex-plugin.git
-cd quantdinger-codex-plugin
+git clone https://github.com/OpenByteInc/QuantDinger_Codex_Plugin.git
+cd QuantDinger_Codex_Plugin
 ```
 
 Windows, PowerShell:
@@ -158,4 +158,4 @@ Runtime caches and non-secret connection settings live at:
 - Windows: `%LOCALAPPDATA%\QuantDinger\Connector`
 - Mac: `~/Library/Application Support/QuantDinger/Connector`
 
-When opening an [issue](https://github.com/OpenByteInc/quantdinger-codex-plugin/issues), include OS/architecture, Codex version, plugin version, the failing step and redacted error text. Never attach tokens, credential stores or private account exports.
+When opening an [issue](https://github.com/OpenByteInc/QuantDinger_Codex_Plugin/issues), include OS/architecture, Codex version, plugin version, the failing step and redacted error text. Never attach tokens, credential stores or private account exports.

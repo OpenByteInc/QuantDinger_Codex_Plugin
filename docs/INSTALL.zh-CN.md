@@ -19,7 +19,7 @@ codex plugin --help
 支持 Windows 10/11 x64。在 **PowerShell** 粘贴：
 
 ```powershell
-codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
+codex plugin marketplace add OpenByteInc/QuantDinger_Codex_Plugin
 codex plugin add quantdinger@quantdinger
 ```
 
@@ -36,7 +36,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 如果已经使用 Homebrew，也可以执行 `brew install uv`，二选一即可。启动器会检查常见的 uv、Homebrew 安装路径和 `PATH`。
 
 ```bash
-codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
+codex plugin marketplace add OpenByteInc/QuantDinger_Codex_Plugin
 codex plugin add quantdinger-macos@quantdinger
 ```
 
@@ -77,8 +77,8 @@ codex plugin add quantdinger-macos@quantdinger
 可以下载仓库，使用不回显的终端输入：
 
 ```text
-git clone https://github.com/OpenByteInc/quantdinger-codex-plugin.git
-cd quantdinger-codex-plugin
+git clone https://github.com/OpenByteInc/QuantDinger_Codex_Plugin.git
+cd QuantDinger_Codex_Plugin
 ```
 
 Windows PowerShell：
@@ -157,4 +157,4 @@ codex plugin remove quantdinger-macos@quantdinger
 - Windows：`%LOCALAPPDATA%\QuantDinger\Connector`
 - Mac：`~/Library/Application Support/QuantDinger/Connector`
 
-提交 [Issue](https://github.com/OpenByteInc/quantdinger-codex-plugin/issues) 时，请附系统／架构、Codex 版本、插件版本、失败步骤和脱敏错误。不要上传 Token、凭据存储或私人账户导出文件。
+提交 [Issue](https://github.com/OpenByteInc/QuantDinger_Codex_Plugin/issues) 时，请附系统／架构、Codex 版本、插件版本、失败步骤和脱敏错误。不要上传 Token、凭据存储或私人账户导出文件。

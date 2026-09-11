@@ -28,7 +28,7 @@ def main():
     assert manifest["name"] == "quantdinger"
     assert re.fullmatch(r"\d+\.\d+\.\d+(\+codex\.[A-Za-z0-9.-]+)?", manifest["version"])
     assert manifest["license"] == "Apache-2.0"
-    assert manifest["repository"] == "https://github.com/OpenByteInc/quantdinger-codex-plugin"
+    assert manifest["repository"] == "https://github.com/OpenByteInc/QuantDinger_Codex_Plugin"
     for field in ("skills", "mcpServers"):
         assert (PLUGIN / manifest[field]).exists(), field
     for field in ("composerIcon", "logo", "logoDark"):
