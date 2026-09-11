@@ -47,6 +47,7 @@ jobs:
           test_password="$(uuidgen)"
           security create-keychain -p "$test_password" "$RUNNER_TEMP/qd-ci.keychain-db"
           security default-keychain -d user -s "$RUNNER_TEMP/qd-ci.keychain-db"
+          security list-keychains -d user -s "$RUNNER_TEMP/qd-ci.keychain-db"
           security unlock-keychain -p "$test_password" "$RUNNER_TEMP/qd-ci.keychain-db"
           security set-keychain-settings -lut 21600 "$RUNNER_TEMP/qd-ci.keychain-db"
       - name: Run native Keychain test

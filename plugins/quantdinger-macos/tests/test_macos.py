@@ -70,6 +70,13 @@ class MacTests(unittest.IsolatedAsyncioTestCase):
             test_python = boot.stdout.strip()
             self.assertTrue(Path(test_python).is_file())
             print("Mac cold bootstrap completed in a fresh Unicode home", flush=True)
+            if os.environ.get("GITHUB_ACTIONS") == "true":
+                ci_keychain = Path(os.environ["RUNNER_TEMP"]) / "qd-ci.keychain-db"
+                self.assertTrue(ci_keychain.is_file())
+                for operation in ("default-keychain", "list-keychains"):
+                    configured = subprocess.run(["security", operation, "-d", "user", "-s", str(ci_keychain)],
+                        env=env, text=True, capture_output=True, timeout=15)
+                    self.assertEqual(configured.returncode, 0, configured.stderr)
             params = StdioServerParameters(command=definition["command"], args=definition["args"],
                                           cwd=str(checkout), env=env)
             try:
