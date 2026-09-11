@@ -43,7 +43,7 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "QuantDinger for Mac",
+    "displayName": "QuantDinger: AI Trading & Backtesting (Mac)",
     "shortDescription": "Research markets. Build strategies. Backtest with trading costs.",
     "longDescription": "Turn a trading idea into a strategy you can test. Research US stocks, Hong Kong stocks, ETFs and crypto in your Codex conversation.\n\nDescribe your rules, build strategy code, and run a historical backtest with fees and slippage. Compare returns, drawdowns and completed trades; save the result and reopen it in QuantDinger.\n\nConnect your own QuantDinger account to inspect positions, fills and pending orders. Supported trading actions require your explicit confirmation and account permissions. See the repository for Windows and macOS installation. Hosted operations may consume credits; historical results do not guarantee future performance.",
     "developerName": "Open Byte Inc",

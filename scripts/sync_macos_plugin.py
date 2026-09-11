@@ -22,7 +22,7 @@ def sync(check=False):
             shutil.copyfile(WINDOWS / relative, target)
     manifest = json.loads((WINDOWS / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
     manifest["name"] = "quantdinger-macos"
-    manifest["interface"]["displayName"] = "QuantDinger for Mac"
+    manifest["interface"]["displayName"] += " (Mac)"
     target = MAC / ".codex-plugin/plugin.json"
     if check:
         assert json.loads(target.read_text(encoding="utf-8")) == manifest
