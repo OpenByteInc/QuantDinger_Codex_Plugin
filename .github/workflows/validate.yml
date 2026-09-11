@@ -59,4 +59,5 @@ jobs:
         run: |
           "$(cat "$RUNNER_TEMP/qd-python")" -I -m unittest discover -s plugins/quantdinger-macos/tests -p 'test_connector.py' -v
           "$(cat "$RUNNER_TEMP/qd-python")" -I -m unittest discover -s plugins/quantdinger-macos/tests -p 'test_macos.py' -k application_support -v
-          "$(cat "$RUNNER_TEMP/qd-python")" -I -m unittest discover -s plugins/quantdinger-macos/tests -p 'test_macos.py' -k cold_launch -v
+          "$(cat "$RUNNER_TEMP/qd-python")" -I -m unittest discover -s plugins/quantdinger-macos/tests -p 'test_macos.py' -k cold_bootstrap -v
+          "$(cat "$RUNNER_TEMP/qd-python")" -I -m unittest discover -s plugins/quantdinger-macos/tests -p 'test_macos.py' -k packaged_native -v

@@ -54,6 +54,8 @@ CI runs on Apple Silicon (`macos-15`). Tests cover the shared MCP protocol, nati
 
 The canonical connector, tool definitions, workflow skills and assets live in the Windows entry. After changing them, run `python scripts/sync_macos_plugin.py`; validation enforces byte parity with the Mac entry. Native launchers and platform tests remain separate.
 
+Cold bootstrap tests use a temporary Unicode HOME without touching credentials. The packaged native connection test uses the real login user's HOME and is restricted to a clean GitHub runner with a disposable keychain; it refuses to replace an existing connection. macOS Keychain belongs to the login user, so changing HOME is not a substitute for creating an isolated OS account. Outside CI, that integration test is skipped while the standalone native vault and bootstrap checks still run.
+
 To intentionally update Mac dependencies, update/review the canonical pins, then run `python scripts/lock_macos_dependencies.py`. This queries PyPI for compatible macOS/universal wheel hashes and omits Windows-only packages. Review and commit the resulting lock; installation uses `--require-hashes --only-binary :all:`. Python is constrained to managed 3.13, with the patch version selected by uv. Repeat macOS tests after any lock or launcher change.
 
 ## Rebuild the Windows runtime
