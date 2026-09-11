@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="460" viewBox="0 0 1600 460">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0b1420"/><stop offset="1" stop-color="#122836"/></linearGradient></defs>
+<rect width="1600" height="460" rx="24" fill="url(#bg)"/>
+<path d="M1000 0V460M0 380H1600" stroke="#29414b" stroke-width="1"/>
+<circle cx="64" cy="64" r="7" fill="#b5f36e"/>
+<g font-family="Arial,Microsoft YaHei,sans-serif">
+<text x="87" y="72" font-size="24" font-weight="700" letter-spacing="3" fill="#f6faf9">QUANTDINGER</text>
+<text x="365" y="72" font-size="18" fill="#9bafb7">/ CODEX PLUGIN</text>
+<text x="56" y="176" font-size="64" font-weight="700" fill="#f6faf9">把交易想法，</text>
+<text x="56" y="257" font-size="70" font-weight="700" fill="#b5f36e">变成可以验证的策略。</text>
+<text x="59" y="324" font-size="20" letter-spacing="2" fill="#9bafb7">美股  /  港股  /  ETF  /  加密货币</text>
+<text x="59" y="428" font-size="18" fill="#c5d7db">WINDOWS + macOS</text>
+<text x="345" y="428" font-size="18" fill="#7f9ba5">Open source · Your account · Your strategies</text>
+<rect x="1056" y="89" width="488" height="74" rx="12" fill="#172f3c" stroke="#31505e"/><text x="1080" y="136" font-size="24" fill="#b5f36e">01</text><text x="1136" y="135" font-size="25" fill="#f6faf9">安装插件</text>
+<rect x="1056" y="186" width="488" height="74" rx="12" fill="#172f3c" stroke="#31505e"/><text x="1080" y="233" font-size="24" fill="#b5f36e">02</text><text x="1136" y="232" font-size="25" fill="#f6faf9">连接自己的账户</text>
+<rect x="1056" y="283" width="488" height="74" rx="12" fill="#172f3c" stroke="#31505e"/><text x="1080" y="330" font-size="24" fill="#b5f36e">03</text><text x="1136" y="329" font-size="25" fill="#f6faf9">完成第一次策略回测</text>
+</g></svg>

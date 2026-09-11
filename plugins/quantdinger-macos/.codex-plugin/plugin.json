@@ -1,0 +1,70 @@
+{
+  "name": "quantdinger-macos",
+  "version": "0.2.0",
+  "description": "AI trading research and strategy backtesting for US stocks, Hong Kong stocks, ETFs, and crypto. Turn ideas into strategies, compare returns and drawdowns, and monitor positions in QuantDinger.",
+  "author": {
+    "name": "Open Byte Inc",
+    "email": "support@quantdinger.com",
+    "url": "https://www.quantdinger.com"
+  },
+  "homepage": "https://www.quantdinger.com",
+  "repository": "https://github.com/OpenByteInc/quantdinger-codex-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "quantdinger",
+    "ai trading",
+    "quantitative trading",
+    "algorithmic trading",
+    "backtesting",
+    "backtest",
+    "trading strategy",
+    "technical analysis",
+    "crypto",
+    "bitcoin",
+    "btc",
+    "ethereum",
+    "eth",
+    "stocks",
+    "etf",
+    "moving average",
+    "rsi",
+    "paper trading",
+    "portfolio monitoring",
+    "drawdown",
+    "量化交易",
+    "策略回测",
+    "比特币",
+    "股票分析",
+    "模拟交易",
+    "US stocks",
+    "Hong Kong stocks",
+    "美股",
+    "港股"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "QuantDinger for Mac",
+    "shortDescription": "Research markets. Build strategies. Backtest with trading costs.",
+    "longDescription": "Turn a trading idea into a strategy you can test. Research US stocks, Hong Kong stocks, ETFs and crypto in your Codex conversation.\n\nDescribe your rules, build strategy code, and run a historical backtest with fees and slippage. Compare returns, drawdowns and completed trades; save the result and reopen it in QuantDinger.\n\nConnect your own QuantDinger account to inspect positions, fills and pending orders. Supported trading actions require your explicit confirmation and account permissions. See the repository for Windows and macOS installation. Hosted operations may consume credits; historical results do not guarantee future performance.",
+    "developerName": "Open Byte Inc",
+    "category": "Finance",
+    "capabilities": [
+      "US, Hong Kong & crypto research",
+      "AI strategy building",
+      "Backtesting & comparison",
+      "Positions & P&L monitoring"
+    ],
+    "defaultPrompt": [
+      "Backtest an NVDA MA20/MA60 strategy over 90 days, including fees.",
+      "Analyze Tencent (0700.HK) over 90 days: trend, volume, and risks.",
+      "Compare BTC moving-average and RSI strategies over 90 days."
+    ],
+    "brandColor": "#1DA8FF",
+    "websiteURL": "https://www.quantdinger.com",
+    "composerIcon": "./assets/quantdinger-cat-logo.png",
+    "logo": "./assets/quantdinger-cat-logo.png",
+    "logoDark": "./assets/quantdinger-cat-logo.png",
+    "screenshots": []
+  },
+  "mcpServers": "./.mcp.json"
+}

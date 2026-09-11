@@ -34,6 +34,8 @@ TOKEN_PATTERN = re.compile(r"qd_agent_[A-Za-z0-9_-]{8,512}\Z")
 
 
 def connector_root() -> Path:
+    if sys.platform == "darwin":
+        return Path.home() / "Library" / "Application Support" / "QuantDinger" / "Connector"
     raw = os.environ.get("LOCALAPPDATA") or os.environ.get("APPDATA")
     return Path(raw or Path.home() / ".config") / "QuantDinger" / "Connector"
 

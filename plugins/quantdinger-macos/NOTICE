@@ -1,0 +1,16 @@
+QuantDinger Codex Plugin
+Copyright 2026 Open Byte Inc
+
+This repository contains the QuantDinger Codex connector, plugin workflows,
+marketplace metadata and distribution tooling, licensed under Apache-2.0.
+
+The bundled Windows runtime includes Python and third-party distributions.
+Their license files and package metadata are retained inside
+plugins/quantdinger/runtime/quantdinger-runtime-win-x64.zip.
+Dependency versions and artifact hashes are recorded in the build directory.
+
+quantdinger-mcp is maintained at https://github.com/OpenByteInc/QuantDinger
+and distributed through https://pypi.org/project/quantdinger-mcp/.
+
+QuantDinger and OpenAI names and logos remain the property of their respective
+owners. This distribution does not imply OpenAI endorsement.

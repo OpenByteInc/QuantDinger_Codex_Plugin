@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "quantdinger": {
+      "command": "/bin/bash",
+      "args": ["./scripts/launch-quantdinger.sh"],
+      "cwd": ".",
+      "env_vars": ["QUANTDINGER_AGENT_TOKEN", "QUANTDINGER_BASE_URL"],
+      "startup_timeout_sec": 600,
+      "default_tools_approval_mode": "writes"
+    }
+  }
+}

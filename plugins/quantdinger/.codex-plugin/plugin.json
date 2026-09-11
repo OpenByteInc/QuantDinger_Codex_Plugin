@@ -1,6 +1,6 @@
 {
   "name": "quantdinger",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "AI trading research and strategy backtesting for US stocks, Hong Kong stocks, ETFs, and crypto. Turn ideas into strategies, compare returns and drawdowns, and monitor positions in QuantDinger.",
   "author": {
     "name": "Open Byte Inc",
@@ -43,9 +43,9 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "QuantDinger: AI Trading & Backtesting",
-    "shortDescription": "Test trading ideas across US stocks, Hong Kong, ETFs, and crypto.",
-    "longDescription": "Have a trading idea? Put it to the test. Describe it in plain language and QuantDinger helps you build a strategy, run a historical backtest, and understand what drove the results.\n\nResearch US stocks, Hong Kong stocks, ETFs, and cryptocurrencies such as Bitcoin and Ethereum. Explore moving averages, RSI, and other technical indicators. Compare strategy versions by return, maximum drawdown, trade count, and transaction costs before deciding what to test next.\n\nKeep your workflow in one conversation: save strategy code, review positions and P&L, and inspect open orders. Start with research and backtesting, then use paper trading or supported live trading with your explicit confirmation.\n\nTry it: backtest an NVDA moving-average strategy, analyze Tencent in Hong Kong, or compare BTC strategies with fees included. Requires a QuantDinger account and Agent Token; this package supports Windows x64. Market and trading access depend on your connected service and permissions. Historical results do not guarantee future performance.",
+    "displayName": "QuantDinger",
+    "shortDescription": "Research markets. Build strategies. Backtest with trading costs.",
+    "longDescription": "Turn a trading idea into a strategy you can test. Research US stocks, Hong Kong stocks, ETFs and crypto in your Codex conversation.\n\nDescribe your rules, build strategy code, and run a historical backtest with fees and slippage. Compare returns, drawdowns and completed trades; save the result and reopen it in QuantDinger.\n\nConnect your own QuantDinger account to inspect positions, fills and pending orders. Supported trading actions require your explicit confirmation and account permissions. See the repository for Windows and macOS installation. Hosted operations may consume credits; historical results do not guarantee future performance.",
     "developerName": "Open Byte Inc",
     "category": "Finance",
     "capabilities": [
@@ -64,9 +64,7 @@
     "composerIcon": "./assets/quantdinger-cat-logo.png",
     "logo": "./assets/quantdinger-cat-logo.png",
     "logoDark": "./assets/quantdinger-cat-logo.png",
-    "screenshots": [
-      "./assets/strategy-workflow.png"
-    ]
+    "screenshots": []
   },
   "mcpServers": "./.mcp.json"
 }

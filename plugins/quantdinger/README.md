@@ -2,7 +2,7 @@
 
 Research US stocks, Hong Kong stocks, ETFs and crypto; build strategies, run backtests and inspect trading activity from Codex.
 
-This folder is the installable Windows x64 plugin. It includes quantdinger-mcp 0.6.2, Python 3.13.15, a credential connector and four workflow skills. macOS packaging is planned and is not included.
+This folder is the installable Windows x64 plugin, version 0.2.0. It includes quantdinger-mcp 0.6.2, Python 3.13.15, a credential connector and four workflow skills. Mac users should install `quantdinger-macos@quantdinger` from the same marketplace.
 
 - [English installation and usage guide](https://github.com/OpenByteInc/quantdinger-codex-plugin#readme)
 - [简体中文安装与使用说明](https://github.com/OpenByteInc/quantdinger-codex-plugin/blob/main/README.zh-CN.md)

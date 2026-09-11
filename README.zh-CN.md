@@ -1,162 +1,114 @@
+<p align="center"><a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="https://ai.quantdinger.com">打开 QuantDinger ↗</a></p>
+
+![QuantDinger：把交易想法变成可以验证的策略](docs/assets/hero-zh.svg)
+
 <p align="center">
-  <img src="plugins/quantdinger/assets/quantdinger-cat-logo.png" width="96" alt="QuantDinger 标志" />
+  <a href="https://github.com/OpenByteInc/quantdinger-codex-plugin/actions/workflows/validate.yml"><img src="https://github.com/OpenByteInc/quantdinger-codex-plugin/actions/workflows/validate.yml/badge.svg" alt="构建与测试" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-b5f36e?style=flat-square" alt="Apache 2.0" /></a>
+  <img src="https://img.shields.io/badge/plugin-0.2.0-253c4c?style=flat-square" alt="插件 0.2.0" />
+  <img src="https://img.shields.io/badge/Windows_+_macOS-available-253c4c?style=flat-square" alt="Windows 与 macOS" />
 </p>
 
-# QuantDinger for Codex
+**说出交易想法，写成策略，再让历史数据检验。**
 
-**把交易想法，变成可以验证的策略。**
+研究**美股、港股、ETF 和加密货币**，编写策略、保存回测、查看账户——连接自己的 QuantDinger，在一个 Codex 对话中完成。
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [官网](https://www.quantdinger.com) · [打开 QuantDinger](https://ai.quantdinger.com) · [后端与 MCP 源码](https://github.com/OpenByteInc/QuantDinger)
+**[安装插件](#1-安装插件)** · **[连接账户](#2-连接自己的账户)** · **[第一次回测](#3-完成第一次回测)** · **[详细教程](docs/INSTALL.zh-CN.md)**
 
-直接在 Codex 对话中研究**美股、港股、ETF 和加密货币**：编写策略、计入成本运行历史回测、比较策略表现，并查看 QuantDinger 账户和交易运行情况。
+## 1. 安装插件
 
-本仓库通过 **GitHub 插件市场源**分发。用户主动添加此来源后安装使用；它不代表已上架 OpenAI 官方公共插件目录，也不代表 OpenAI 背书。
+准备支持插件的 Codex 客户端、Git，以及可以运行 `codex --version` 的终端。如果找不到命令，请先安装 [Codex CLI](https://developers.openai.com/codex/cli)。按电脑系统**选择一种**安装：
 
-![从策略需求到回测分析的示意图](plugins/quantdinger/assets/strategy-workflow.png)
-
-*图片仅作流程演示，其中结果不构成收益承诺。*
-
-## 能做什么
-
-| 场景 | 可以获得什么 |
-| --- | --- |
-| 市场研究 | 标的搜索、可用报价、历史价格与成交量、因子和标的池 |
-| 策略开发 | Strategy API V2 编写指引、编译检查、源码保存与版本记录 |
-| 回测与比较 | 异步回测、标准记录 `runId`、收益、回撤、成本和交易记录 |
-| 交易状态查看 | 账户快照、策略持仓、成交、挂单和运行状态 |
-| 授权操作 | 在 Token 权限、账户设置和用户明确确认范围内执行支持的模拟或实盘操作 |
-
-AI 助手利用这些工具完成研究与解释；当前版本没有单独暴露 QuantDinger 原生 AI 投研报告生成工具。实际市场、数据时效和券商操作能力由所连接的后端及数据源决定。
-
-## 平台支持
-
-| 平台 | 当前状态 |
-| --- | --- |
-| Windows 10/11 x64 | 内置运行环境，提供连接器与离线安装回归测试 |
-| macOS / Apple Silicon | 计划适配；当前 Windows 包不能在 Mac 上运行 |
-| 其他架构 / Linux | 当前版本未提供运行环境安装包 |
-
-插件版本 **0.1.0**，内置 **quantdinger-mcp 0.6.2** 和 Python **3.13.15**。插件与 MCP 独立编号。Windows 包自带依赖，用户无需安装 Python 或 pip；具体电脑还可能受到 Windows 安全策略和 Codex 客户端版本影响。
-
-## Windows 安装
-
-准备支持插件功能的 Codex 客户端、终端可用的 `codex` 命令、Git，以及 QuantDinger 账户或自托管实例。企业管理的工作区可能限制自定义插件来源。
-
-在 PowerShell 中执行：
+### Windows · 打开 PowerShell
 
 ```powershell
 codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
 codex plugin add quantdinger@quantdinger
 ```
 
-新建一个 Codex 任务，通过 `@` 选择 **QuantDinger**。如果客户端提供插件浏览器，也可以在其中查找 QuantDinger 来源。如果提示不认识 `plugin` 或 `marketplace` 命令，请先更新 Codex。
+支持 Windows 10/11 x64，已内置 Python 和依赖，首次启动在本机校验并解压。**不用自己安装 Python。**
 
-仓库包含约 26 MB 的 Windows 运行环境压缩包，确保通过市场源安装时文件完整。首次启动会在本机校验并解压，不需要联网下载 Python 或安装依赖；行情查询和账户操作仍需要访问所连接的 QuantDinger 服务。
+### Mac · 打开“终端”
 
-### 从本地目录安装
+先用 [uv 官方安装器](https://docs.astral.sh/uv/getting-started/installation/)安装 `uv`，已有则跳过：
 
-```powershell
-git clone https://github.com/OpenByteInc/quantdinger-codex-plugin.git
-cd quantdinger-codex-plugin
-codex plugin marketplace add .
-codex plugin add quantdinger@quantdinger
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-使用本地市场源时，请保留这个目录。只下载并解压仓库不会自动完成安装，还需要把解压后的仓库根目录添加为市场源。不同客户端的行为请参考[官方插件打包说明](https://developers.openai.com/plugins/build/plugins)。
+然后安装 Mac 插件：
 
-## 连接自己的账户
-
-1. 打开 [QuantDinger 的 Agent Token 设置](https://ai.quantdinger.com/#/profile?tab=agentTokens)，创建权限适当、可撤销的 Token。初次测试建议使用仅限模拟交易的权限。
-2. 在启用 QuantDinger 的 Codex 任务中要求连接账户，按提示提供 Token。**在对话中输入的 Token 会进入对话和工具历史。** 连接器会向你选择的 QuantDinger 服务验证它，再将本地副本保存到系统凭据库；返回内容不会回显 Token。
-3. 核对连接成功后的服务地址、权限及是否仅限模拟交易，然后开始分析或回测。连接账户本身不等于授权下单。
-
-默认后端为 `https://ai.quantdinger.com`。自托管用户需要明确指定实例根地址，并使用该实例签发的 Token。除本机回环开发地址外，要求使用 HTTPS。
-
-如果不希望 Token 出现在对话历史，可以在仓库根目录运行下面的命令，通过终端隐藏输入配置：
-
-```powershell
-.\plugins\quantdinger\scripts\launch-quantdinger.cmd configure
+```bash
+codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
+codex plugin add quantdinger-macos@quantdinger
 ```
 
-自托管时追加 `--base-url https://your-quantdinger-host.example`。不要把 Token 本身放入命令行、Git 提交或 GitHub Issue。
+Mac 启动器支持 Apple Silicon 和 Intel 运行环境，使用的 Codex 客户端也需要支持对应电脑。首次启动会下载独立 Python 3.13 和经过哈希锁定的依赖，**请保持联网并等待初始化完成**。后续启动复用环境。
 
-## 直接试试这些需求
+> **装好了？** 新建一个 **Codex 任务**，输入 `@`，选择 **QuantDinger**（Windows）或 **QuantDinger for Mac**。也可以打开详情，点击 **“立即试用 / Try now”**。
 
-**美股：编写并回测策略**
+![Codex 中的真实 QuantDinger 插件界面，右上角为 Try now，下方为示例入口](docs/assets/codex-plugin-screen.png)
 
-> 为 NVDA 创建 MA20/MA60 均线交叉策略，回测最近 90 天。初始资金 10,000，手续费 0.1%，滑点 0.05%。保存回测，返回 runId、最大回撤和完整交易数量。
+<sub>维护者提供的真实 Windows 截图。点击右上角 Try now，或选择一个示例开始。截图拍摄于 0.2.0 缩短标题、增加 Mac 入口之前；不同 Codex 版本的布局和文字可能略有不同。</sub>
 
-**港股：理解市场变化**
+## 2. 连接自己的账户
 
-> 分析腾讯 0700.HK 最近 90 天的趋势、成交量变化和历史回撤，明确说明实际覆盖的数据日期。
+1. 登录 [QuantDinger](https://ai.quantdinger.com)。
+2. 打开 **[个人中心 → Agent Token](https://ai.quantdinger.com/#/profile?tab=agentTokens)**，创建权限适当的 Token，初次测试建议仅限模拟交易。
+3. 在启用插件的任务中发送：**“帮我连接 QuantDinger 账户，并确认我的权限。不要下单。”**
+4. 按提示提供 Token，核对返回的**服务地址、权限和是否仅限模拟交易**。
 
-**ETF：比较策略差异**
+**成功标志：** 返回 `connected`，账户和权限已验证。随后可以直接在同一对话中继续，连接账户不会启动交易。
 
-> 在相同时间范围、资金和成本设置下，对比 SPY 的均线策略与 RSI 策略，解释表现差异。
+Mac 首次使用可能弹出钥匙串访问提示，请确认请求来自刚安装的 QuantDinger 运行环境。Token 的本地副本保存到系统凭据库；在聊天中输入的 Token 也会进入对话和工具历史。不希望这样保存，可以使用[终端隐藏输入](docs/INSTALL.zh-CN.md#不在聊天中输入-token)。
 
-**加密货币：验证完整进出场规则**
+## 3. 完成第一次回测
 
-> 为 BTC/USDT 编写包含趋势过滤、RSI 入场、2% 止损、3% 止盈和最大持仓时间的策略，运行回测，检查完整交易和剩余持仓。
-
-**账户监控：只读查看**
-
-> 查看我的模拟账户持仓、策略成交和挂单，解释需要关注的问题，不修改账户或策略状态。
-
-为减少时区与数据源末日数据尚未就绪造成的失败，历史数据可能保守排除最近一天。分析和对比时请以实际返回的数据范围为准。特定时间段内没有完整平仓交易，也可能是策略信号的正常结果。
-
-## 运行方式与费用
+复制下面这段到同一个任务：
 
 ```text
-用户电脑上的 Codex
-  → 本地 QuantDinger Connector（stdio MCP）
-  → 固定版本的 quantdinger-mcp
-  → 用户选择的 QuantDinger 后端（HTTPS Agent Gateway）
+为 NVDA 编写 MA20/MA60 均线交叉策略，回测最近 90 天。
+初始资金 10,000，手续费 0.1%，滑点 0.05%。
+保存结果，返回 runId、实际数据日期、收益率、最大回撤、
+完整交易数量和未平仓仓位。
+不要部署策略，也不要开始交易。
 ```
 
-每个系统用户连接自己的账户。同一系统用户的插件任务共用连接配置，更换凭据影响后续调用。后端负责权限、账户隔离、幂等和计费；仓库不会附带可供所有人共用的管理员 Token。
+Codex 会检查并保存策略、提交回测、等待完成，再解释结果。返回的 **`runId`** 对应 QuantDinger 的标准回测记录。解读时一起检查实际日期、成本、完整交易和剩余持仓；某些行情区间没有完整平仓交易，也可能是正常结果。
 
-插件源码开源。使用 QuantDinger 云端功能可能按服务当前价格扣除积分；开源安装不等于云端功能免费。Codex 本身的访问与使用费用另行计算。
-
-## 更新与卸载
-
-通过 GitHub 市场源安装的用户，可以执行：
-
-```powershell
-codex plugin marketplace upgrade quantdinger
-codex plugin add quantdinger@quantdinger
-```
-
-插件更新后新建任务以加载新版本；普通 Token 更换不需要重启 Codex。维护者以完整、经过测试的运行环境包交付更新，不会在用户电脑上执行原地 pip 升级。
-
-卸载插件：
-
-```powershell
-codex plugin remove quantdinger@quantdinger
-```
-
-卸载插件**不会停止后端正在运行的策略，也不会撤销 Agent Token**，请在 QuantDinger 中单独管理。运行环境缓存和系统凭据库条目可能保留，详见[安全与数据处理说明](SECURITY.md)。
-
-## 常见问题
-
-| 问题 | 排查方向 |
+| 下一步想探索什么 | 可以直接这样问 |
 | --- | --- |
-| 看不到插件 | 是否添加来源、安装插件并新建任务；检查工作区限制及 Codex 版本 |
-| 找不到 `cmd.exe` / 平台不支持 | 当前包仅适用于 Windows x64，Mac 版仍待适配 |
-| 首次启动失败 | 压缩包完整性、本地应用数据目录写入权限、Windows 安全策略；不要关闭完整性校验 |
-| 身份验证被拒绝 | 后端地址是否正确，Token 是否有效、过期或缺少权限 |
-| 积分不足 | 检查 QuantDinger 余额和该操作当前价格 |
-| 回测没有完整交易 | 查看入场/退出条件、实际数据范围与未平仓仓位，并打开保存的回测记录 |
-| 账户或订单操作被拒绝 | Token 权限、仅限模拟限制、券商环境及是否明确确认操作 |
+| **港股 · 腾讯** | 分析 0700.HK 最近 90 天的趋势、成交量和历史回撤，注明数据日期。 |
+| **ETF · SPY** | 在相同日期、资金、手续费和滑点设置下，对比均线策略与 RSI 策略。 |
+| **加密货币 · BTC/USDT** | 回测带趋势过滤、RSI 入场、2% 止损、3% 止盈和最长持仓时间的策略，检查完整交易。 |
+| **账户 · 只读查看** | 查看我的模拟账户持仓、策略成交和挂单，解释异常，不修改任何状态。 |
 
-遇到可复现问题，请在 [Issues](https://github.com/OpenByteInc/quantdinger-codex-plugin/issues) 提供操作系统、Codex/插件版本和脱敏错误信息。不要上传凭据或私有账户记录。
+## 从市场研究到交易运行
 
-## 开发与许可证
+| 研究市场 | 编写与验证 | 监控与操作 |
+| --- | --- | --- |
+| 标的搜索、报价、历史 K 线 | Strategy API V2 策略编写 | 账户与策略持仓 |
+| 成交量、因子、标的池 | 编译检查、源码版本管理 | 成交、挂单、运行状态 |
+| 美股 / 港股 / ETF / Crypto | 保存回测、比较交易成本 | 在授权范围内明确确认操作 |
 
-- [构建与测试](BUILDING.md)
-- [贡献指南](CONTRIBUTING.md)
-- [安全与数据处理](SECURITY.md)
-- [更新记录](CHANGELOG.md)
+```text
+你的 Codex → 本地 QuantDinger 插件 → 你的 QuantDinger 后端
+```
 
-市场目录位于 `.agents/plugins/marketplace.json`，可安装插件位于 `plugins/quantdinger/`。MCP 业务工具继续在[总仓库](https://github.com/OpenByteInc/QuantDinger/tree/main/mcp_server)维护，本仓库使用固定版本的 PyPI 包。
+**[完整安装、自托管、更新与排错教程 →](docs/INSTALL.zh-CN.md)** · **[反馈问题 →](https://github.com/OpenByteInc/quantdinger-codex-plugin/issues)**
 
-采用 [Apache-2.0](LICENSE) 开源许可证。内置第三方软件保留各自许可证，见 [NOTICE](NOTICE)。开源许可不代表获得 QuantDinger 或 OpenAI 商标背书。交易存在风险，历史回测不保证未来收益。
+<details>
+<summary>费用、数据与权限说明</summary>
+
+- 插件源码开源，QuantDinger 云端操作可能按当前价格扣除积分；Codex 使用费用另行计算。
+- 助手利用工具完成研究，当前版本没有单独暴露原生 AI 投研报告生成工具。
+- 为减少时区和数据源末日数据未就绪造成的失败，历史数据可能有意排除最近一天，请以实际返回日期为准。
+- 实际市场和操作能力由后端与账户权限决定，连接账户不代表授权交易。
+- 卸载插件不会停止后端策略或撤销 Token。
+- 本仓库是独立 GitHub 市场源，不代表已上架 OpenAI 官方公共目录或获得其背书。历史回测不保证未来收益。详见[安全与数据处理](SECURITY.md)。
+
+</details>
+
+---
+
+[构建与测试](BUILDING.md) · [参与贡献](CONTRIBUTING.md) · [更新记录](CHANGELOG.md) · [Apache-2.0](LICENSE) · [第三方声明](NOTICE) · [后端与 MCP 源码](https://github.com/OpenByteInc/QuantDinger)

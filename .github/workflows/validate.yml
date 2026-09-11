@@ -27,3 +27,29 @@ jobs:
           if ($LASTEXITCODE -and $LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           & "$qdRuntime/python/python.exe" -I -m unittest discover -s plugins/quantdinger/tests -p "test_*.py" -v
           exit $LASTEXITCODE
+  macos:
+    name: macOS (${{ matrix.runner }})
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [macos-15, macos-15-intel]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Bootstrap managed Python and locked dependencies
+        run: |
+          /bin/bash plugins/quantdinger-macos/scripts/launch-quantdinger.sh --print-python > "$RUNNER_TEMP/qd-python"
+          "$(cat "$RUNNER_TEMP/qd-python")" -I scripts/validate_repository.py
+          "$(cat "$RUNNER_TEMP/qd-python")" -I scripts/sync_macos_plugin.py --check
+      - name: Create disposable CI keychain
+        run: |
+          test_password="$(uuidgen)"
+          security create-keychain -p "$test_password" "$RUNNER_TEMP/qd-ci.keychain-db"
+          security default-keychain -d user -s "$RUNNER_TEMP/qd-ci.keychain-db"
+          security unlock-keychain -p "$test_password" "$RUNNER_TEMP/qd-ci.keychain-db"
+          security set-keychain-settings -lut 21600 "$RUNNER_TEMP/qd-ci.keychain-db"
+      - name: Run shared protocol and native macOS tests
+        run: |
+          "$(cat "$RUNNER_TEMP/qd-python")" -I -m unittest discover -s plugins/quantdinger-macos/tests -p 'test_*.py' -v

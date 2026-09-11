@@ -1,162 +1,114 @@
+<p align="center"><a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="https://ai.quantdinger.com">Open QuantDinger ↗</a></p>
+
+![QuantDinger — your trading research desk inside Codex](docs/assets/hero-en.svg)
+
 <p align="center">
-  <img src="plugins/quantdinger/assets/quantdinger-cat-logo.png" width="96" alt="QuantDinger logo" />
+  <a href="https://github.com/OpenByteInc/quantdinger-codex-plugin/actions/workflows/validate.yml"><img src="https://github.com/OpenByteInc/quantdinger-codex-plugin/actions/workflows/validate.yml/badge.svg" alt="Build and tests" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-b5f36e?style=flat-square" alt="Apache 2.0" /></a>
+  <img src="https://img.shields.io/badge/plugin-0.2.0-253c4c?style=flat-square" alt="Plugin 0.2.0" />
+  <img src="https://img.shields.io/badge/Windows_+_macOS-available-253c4c?style=flat-square" alt="Windows and macOS" />
 </p>
 
-# QuantDinger for Codex
+**Describe your trading idea. Build the rules. See what the historical data says.**
 
-**Turn a trading idea into a strategy you can test.**
+Research **US stocks, Hong Kong stocks, ETFs and crypto**, build strategies, save backtests and inspect your accounts — all from a Codex conversation connected to your own QuantDinger account.
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [Website](https://www.quantdinger.com) · [Open QuantDinger](https://ai.quantdinger.com) · [Backend & MCP source](https://github.com/OpenByteInc/QuantDinger)
+**[Install](#1-install)** · **[Connect](#2-connect-your-account)** · **[First backtest](#3-run-your-first-backtest)** · **[Detailed guide](docs/INSTALL.md)**
 
-Research **US stocks, Hong Kong stocks, ETFs, and crypto** from a Codex conversation. Build strategy code, run historical backtests with costs, compare results, and inspect your QuantDinger accounts and trading activity.
+## 1. Install
 
-This repository distributes the QuantDinger plugin through a **GitHub marketplace**. Users add this source and install the plugin themselves. It is not a listing in OpenAI's public plugin directory or an OpenAI endorsement.
+You need a plugin-capable Codex client, Git, and a terminal where `codex --version` works. If the command is missing, install the [Codex CLI](https://developers.openai.com/codex/cli). Choose **one** platform:
 
-![Illustrative strategy-to-backtest workflow](plugins/quantdinger/assets/strategy-workflow.png)
-
-*Illustration only; displayed results are not a performance claim.*
-
-## What you can do
-
-| Workflow | What you get |
-| --- | --- |
-| Explore markets | Symbol search, available quotes, historical prices, volume, factors and universes |
-| Build a strategy | Strategy API V2 authoring guidance, compilation, saved source and version history |
-| Backtest and compare | Asynchronous backtests, saved `runId`, returns, drawdowns, costs and trade records |
-| Inspect trading | Account snapshots, strategy positions, fills, pending orders and runtime state |
-| Operate with permission | Supported paper/live actions subject to your token scopes, account settings and explicit confirmation |
-
-The AI assistant combines the available tools to research and explain results. This release does not expose a separate native QuantDinger AI research-report generator. Markets, data freshness and broker actions depend on the connected backend and providers.
-
-## Platform status
-
-| Platform | Status |
-| --- | --- |
-| Windows 10/11 x64 | Bundled runtime; connector and offline installation regression tests included |
-| macOS, Apple Silicon | Planned; the current Windows package does not run on Mac |
-| Other architectures / Linux | No packaged runtime in this release |
-
-Plugin **0.1.0** bundles **quantdinger-mcp 0.6.2** and Python **3.13.15**. Plugin and MCP versions are separate. The Windows runtime includes its dependencies, so users do not need to install Python or pip. Clean-machine compatibility still depends on Windows security settings and the Codex client version.
-
-## Install on Windows
-
-You need a supported Codex client with plugin support, the `codex` command available in your terminal, Git, and a QuantDinger account or self-hosted instance. Managed workspaces may restrict custom plugin sources.
-
-Run in PowerShell:
+### Windows · PowerShell
 
 ```powershell
 codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
 codex plugin add quantdinger@quantdinger
 ```
 
-Open a new Codex task and select **QuantDinger** with `@`. If your client has a plugin browser, look for the QuantDinger source there. Update Codex if `plugin` or `marketplace` is not a recognized command.
+Windows 10/11 x64. Python and dependencies are bundled and extracted locally. **No Python installation needed.**
 
-The Git repository includes the approximately 26 MB Windows runtime archive so a normal marketplace install is complete. First launch verifies and extracts it locally; no Python download or online dependency installation happens during bootstrap. Market queries and account operations still require a connection to your QuantDinger service.
+### Mac · Terminal
 
-### Install from a local checkout
+Install `uv` once with its [official installer](https://docs.astral.sh/uv/getting-started/installation/) (skip if installed):
 
-```powershell
-git clone https://github.com/OpenByteInc/quantdinger-codex-plugin.git
-cd quantdinger-codex-plugin
-codex plugin marketplace add .
-codex plugin add quantdinger@quantdinger
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Keep the checkout in place when using it as a local marketplace. Unzipping a repository by itself does not install the plugin; add the extracted repository root as a marketplace first. See the [official packaging guide](https://developers.openai.com/plugins/build/plugins) for client-specific behavior.
+Then install the Mac plugin:
 
-## Connect your account
-
-1. Open [QuantDinger's Agent Token settings](https://ai.quantdinger.com/#/profile?tab=agentTokens) and issue a scoped, revocable token. Start with paper-only permissions for testing.
-2. In a QuantDinger-enabled Codex task, ask to connect your account, then supply the token when prompted. **A token entered in a conversation is present in chat/tool history.** The connector verifies it with the selected QuantDinger endpoint and stores its local copy in the OS credential vault; it does not echo the token in its response.
-3. Check the reported endpoint, permissions and paper-only status, then ask for your first analysis or backtest. Connecting an account does not authorize a trade.
-
-Default backend: `https://ai.quantdinger.com`. For a self-hosted instance, explicitly specify its root URL and use a token issued by that instance. HTTPS is required except for loopback development addresses.
-
-Prefer not to put a token in chat? From the repository root, configure it through the masked terminal prompt instead:
-
-```powershell
-.\plugins\quantdinger\scripts\launch-quantdinger.cmd configure
+```bash
+codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
+codex plugin add quantdinger-macos@quantdinger
 ```
 
-For self-hosting, append `--base-url https://your-quantdinger-host.example`. Never put the token itself on a command line, in a Git commit, or in a GitHub issue.
+The launcher supports Apple Silicon and Intel runtimes; your Codex client must also support your Mac. First launch downloads managed Python 3.13 and hash-locked dependencies into an isolated user environment. **Stay online and allow the initial setup to finish.** Later launches reuse the environment.
 
-## Try these prompts
+> **Installed?** Open a **new Codex task**, type `@`, and select **QuantDinger** (Windows) or **QuantDinger for Mac**. You can also open its details and click **Try now**.
 
-**US stocks — build and backtest**
+![Real QuantDinger plugin screen with Try now and example prompts](docs/assets/codex-plugin-screen.png)
 
-> Build an NVDA MA20/MA60 crossover strategy for the last 90 days. Use 10,000 initial capital, 0.1% fees and 0.05% slippage. Save the backtest and return its runId, drawdown and completed trades.
+<sub>Real Windows capture supplied by the maintainer. Click Try now at the top right, or choose a prompt. This capture predates the shorter title and Mac entry in 0.2.0; your client's labels may differ.</sub>
 
-**Hong Kong — understand the market**
+## 2. Connect your account
 
-> Analyze Tencent (0700.HK) over the last 90 days. Explain the trend, volume changes and historical drawdown. Show the actual dates covered by the data.
+1. Sign in to [QuantDinger](https://ai.quantdinger.com).
+2. Open **[Profile → Agent Tokens](https://ai.quantdinger.com/#/profile?tab=agentTokens)** and issue a scoped token. Start with paper-only permissions.
+3. In your plugin-enabled task, send: **“Connect my QuantDinger account and verify my permissions. Do not place any orders.”**
+4. Supply the token when prompted. Check the returned **endpoint, permissions and paper-only status**.
 
-**ETFs — compare strategies**
+**Success looks like:** `connected`, with a verified account and permissions. Continue in the same conversation. Connecting does not start trading.
 
-> Compare moving-average and RSI strategies on SPY using the same dates, capital and costs. Explain why their results differ.
+On Mac, a Keychain prompt may appear. Confirm it belongs to the QuantDinger runtime you just installed. The token's local copy lives in the OS vault; tokens entered in chat also remain in chat/tool history. Prefer a [masked terminal prompt](docs/INSTALL.md#keep-your-token-out-of-chat) if you want to avoid that.
 
-**Crypto — test more complete rules**
+## 3. Run your first backtest
 
-> Build a BTC/USDT strategy with a trend filter, RSI entry, a 2% stop loss, a 3% take profit and a maximum holding period. Backtest it and inspect completed trades and any remaining position.
-
-**Account monitoring — read only**
-
-> Show my paper-account positions, strategy trades and pending orders. Explain anything that needs attention without changing the account.
-
-Historical data may conservatively exclude the latest day to avoid timezone and provider availability failures. Use the returned data range when interpreting or comparing results. A strategy can legitimately produce no closed trades over a given period.
-
-## Architecture and charges
+Copy this into the same task:
 
 ```text
-Codex on your computer
-  -> local QuantDinger Connector (MCP over stdio)
-  -> pinned quantdinger-mcp service
-  -> your QuantDinger backend (HTTPS Agent Gateway)
+Build an NVDA MA20/MA60 crossover strategy and backtest the last 90 days.
+Use 10,000 initial capital, 0.1% fees and 0.05% slippage.
+Save the result. Return its runId, actual data dates, return,
+maximum drawdown, completed trades and any remaining position.
+Do not deploy or start trading.
 ```
 
-Each OS user connects their own account. Connection settings are shared across that user's plugin tasks; switching credentials affects subsequent calls. The backend enforces permissions, account isolation, idempotency and billing. There is no shared administrator token in this repository.
+Codex checks and saves the strategy, submits the backtest, waits for completion, and explains the results. The **`runId`** identifies the standard saved record in QuantDinger. Check the actual date range, costs, closed trades and open positions together; some periods legitimately produce no closed trades.
 
-The plugin source is open source. Hosted QuantDinger operations may consume credits according to the service's current pricing; open-source installation does not make cloud usage free. Codex access and usage are separate.
-
-## Update and uninstall
-
-For the GitHub marketplace installation:
-
-```powershell
-codex plugin marketplace upgrade quantdinger
-codex plugin add quantdinger@quantdinger
-```
-
-Start a new task after a plugin update. Ordinary token replacement does not require restarting Codex. Maintainers ship complete tested runtime bundles; the connector does not run an in-place pip upgrade on customers' machines.
-
-To remove the plugin:
-
-```powershell
-codex plugin remove quantdinger@quantdinger
-```
-
-Uninstalling the plugin does **not** stop strategies already running on your QuantDinger backend or revoke its Agent Token. Manage those separately in QuantDinger. Local runtime caches and credential-vault entries may remain; see [security and data handling](SECURITY.md).
-
-## Troubleshooting
-
-| Symptom | Check |
+| Explore next | Try asking |
 | --- | --- |
-| Plugin not visible | Marketplace was added, plugin installed, and a new task opened; check workspace policy and Codex version |
-| `cmd.exe` unavailable / unsupported platform | This package is Windows x64; macOS packaging is still planned |
-| First launch fails | Runtime archive integrity, write access to local app data, Windows security policy; do not disable integrity checks |
-| Authentication rejected | Correct backend and a valid, unexpired token with the required scopes |
-| Insufficient credits | QuantDinger balance and the operation's current price |
-| No complete backtest trades | Check entry/exit rules, actual data range and open positions; inspect the saved run rather than assuming an execution bug |
-| Account or order request denied | Token scopes, paper-only restrictions, provider environment and explicit action confirmation |
+| **Hong Kong · Tencent** | Analyze 0700.HK over 90 days: trend, volume and historical drawdown. Show the data dates. |
+| **ETF · SPY** | Compare moving-average and RSI strategies with identical dates, capital, fees and slippage. |
+| **Crypto · BTC/USDT** | Backtest RSI entries with a trend filter, 2% stop, 3% take profit and a maximum holding period. Inspect completed trades. |
+| **Portfolio · Read only** | Show my paper-account positions, strategy fills and pending orders. Explain issues without changing anything. |
 
-For reproducible problems, open an [issue](https://github.com/OpenByteInc/quantdinger-codex-plugin/issues) with OS, Codex/plugin versions and redacted error text. Do not attach credentials or private account records.
+## One workflow, from research to operations
 
-## Development and license
+| Research | Build & test | Monitor & operate |
+| --- | --- | --- |
+| Symbols, quotes, historical bars | Strategy API V2 code | Account and strategy positions |
+| Volume, factors, universes | Compilation and source versions | Fills, orders, runtime state |
+| US / HK / ETF / crypto | Saved backtests and cost comparisons | Scoped, explicitly confirmed actions |
 
-- [Build and test](BUILDING.md)
-- [Contributing](CONTRIBUTING.md)
-- [Security and data handling](SECURITY.md)
-- [Changelog](CHANGELOG.md)
+```text
+Your Codex → Local QuantDinger plugin → Your QuantDinger backend
+```
 
-The marketplace catalog is in `.agents/plugins/marketplace.json`; the installable plugin is in `plugins/quantdinger/`. MCP business tools remain in the [main repository](https://github.com/OpenByteInc/QuantDinger/tree/main/mcp_server) and are consumed as a pinned PyPI release.
+**[Installation, self-hosting, updates & troubleshooting →](docs/INSTALL.md)** · **[Report an issue →](https://github.com/OpenByteInc/quantdinger-codex-plugin/issues)**
 
-Licensed under [Apache-2.0](LICENSE). Bundled third-party software retains its own licenses; see [NOTICE](NOTICE). The license does not grant rights to use QuantDinger or OpenAI trademarks as an endorsement. Trading involves risk, and historical backtests do not guarantee future performance.
+<details>
+<summary>Costs, data and permissions</summary>
+
+- The plugin is open source; hosted operations may consume QuantDinger credits. Codex usage is separate.
+- The assistant assembles research from tools. No separate native AI report-generation tool is exposed in this release.
+- Historical data may intentionally exclude the latest day for timezone/provider availability reasons. Compare actual returned dates.
+- Supported markets and actions depend on the backend and account permissions. Connecting does not authorize trading.
+- Uninstalling does not stop server-side strategies or revoke tokens.
+- GitHub distribution is separate from OpenAI's public directory and is not an endorsement. Historical results do not guarantee future performance. See [security and data handling](SECURITY.md).
+
+</details>
+
+---
+
+[Build & test](BUILDING.md) · [Contribute](CONTRIBUTING.md) · [Changelog](CHANGELOG.md) · [Apache-2.0](LICENSE) · [Third-party notices](NOTICE) · [Backend & MCP source](https://github.com/OpenByteInc/QuantDinger)

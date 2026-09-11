@@ -15,6 +15,18 @@
         "authentication": "ON_INSTALL"
       },
       "category": "Finance"
+    },
+    {
+      "name": "quantdinger-macos",
+      "source": {
+        "source": "local",
+        "path": "./plugins/quantdinger-macos"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Finance"
     }
   ]
 }

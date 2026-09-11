@@ -3,6 +3,9 @@
 *.json text eol=lf
 *.md text eol=lf
 *.yml text eol=lf
+*.sh text eol=lf
+*.lock text eol=lf
+*.svg text eol=lf
 *.cmd text eol=crlf
 *.ps1 text eol=crlf
 *.png binary
@@ -11,3 +14,5 @@
 plugins/quantdinger/scripts/connector.py text eol=crlf
 plugins/quantdinger/scripts/connector-tools.json text eol=lf
 plugins/quantdinger/scripts/runtime-check.py text eol=lf
+plugins/quantdinger-macos/scripts/connector.py text eol=crlf
+plugins/quantdinger-macos/scripts/connector-tools.json text eol=lf
