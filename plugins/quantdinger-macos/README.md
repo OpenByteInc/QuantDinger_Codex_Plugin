@@ -2,7 +2,7 @@
 
 Research US stocks, Hong Kong stocks, ETFs and crypto from Codex. Build strategies, save backtests and inspect your QuantDinger accounts.
 
-This is the macOS entry, version 0.2.0, with quantdinger-mcp 0.6.2 and four workflow skills. It supports Apple Silicon and Intel runtimes; your Codex client must also support your Mac.
+This is the macOS entry, version 0.2.0, with quantdinger-mcp 0.6.2 and four workflow skills. It supports Apple Silicon (M-series) Macs. Intel Macs are not supported in this release.
 
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/) once, then:
 

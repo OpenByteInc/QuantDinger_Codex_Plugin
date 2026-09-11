@@ -40,7 +40,7 @@ codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
 codex plugin add quantdinger-macos@quantdinger
 ```
 
-Choose **QuantDinger for Mac**, not the Windows entry. The launcher supports Apple Silicon (`arm64`) and Intel (`x86_64`); your chosen Codex client must also support that hardware. This is a Mac desktop/CLI integration, not an iOS app.
+Choose **QuantDinger for Mac**, not the Windows entry. This release supports **Apple Silicon (`arm64`, M series)**. Intel Macs are not supported: the current cryptography dependency has no official Intel macOS wheel. Use a native arm64 Terminal and Codex client, not Rosetta. This is a Mac desktop/CLI integration, not an iOS app.
 
 On first launch, stay online while uv downloads a managed Python 3.13 and installs the exact, hash-locked dependencies into a private environment. This can take several minutes. Subsequent launches reuse the environment; market queries still need network access.
 
@@ -145,6 +145,7 @@ Uninstalling does **not** revoke a token, delete the shared credential store or 
 | `codex` or `plugin` command missing | Install/update the Codex CLI, reopen the terminal, and confirm the client supports plugins. |
 | Installed but absent from the app | Match OS user/profile, open a new task, and confirm the marketplace and platform entry. Restart the app if it has not refreshed. |
 | Mac tries to run `cmd.exe` | Remove the Windows entry and install `quantdinger-macos@quantdinger`. |
+| `apple_silicon_required` | Use an M-series Mac and a native arm64 terminal/client. This release does not support Intel Macs. |
 | `uv_required` | Install uv using the official instructions above. The launcher searches standard per-user and Homebrew paths. |
 | First Mac setup times out | Check access to Python distribution downloads and PyPI, then retry. Completed environments are reused; a partial environment is quarantined before retry. |
 | Credential storage fails on Mac | Unlock your login Keychain and check the relevant access prompt. Do not disable Keychain protection. |

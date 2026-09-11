@@ -43,7 +43,7 @@ codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
 codex plugin add quantdinger-macos@quantdinger
 ```
 
-The launcher supports Apple Silicon and Intel runtimes; your Codex client must also support your Mac. First launch downloads managed Python 3.13 and hash-locked dependencies into an isolated user environment. **Stay online and allow the initial setup to finish.** Later launches reuse the environment.
+Supports **Apple Silicon Macs (M series)**. Intel Macs are not supported in this release. First launch downloads managed Python 3.13 and hash-locked dependencies into an isolated user environment. **Stay online and allow the initial setup to finish.** Later launches reuse the environment.
 
 > **Installed?** Open a **new Codex task**, type `@`, and select **QuantDinger** (Windows) or **QuantDinger for Mac**. You can also open its details and click **Try now**.
 

@@ -28,16 +28,15 @@ jobs:
           & "$qdRuntime/python/python.exe" -I -m unittest discover -s plugins/quantdinger/tests -p "test_*.py" -v
           exit $LASTEXITCODE
   macos:
-    name: macOS (${{ matrix.runner }})
-    strategy:
-      fail-fast: false
-      matrix:
-        runner: [macos-15, macos-15-intel]
-    runs-on: ${{ matrix.runner }}
+    name: macOS Apple Silicon
+    runs-on: macos-15
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.12.13'
+          cache-dependency-glob: 'plugins/quantdinger-macos/runtime/requirements-macos.lock'
       - name: Bootstrap managed Python and locked dependencies
         run: |
           /bin/bash plugins/quantdinger-macos/scripts/launch-quantdinger.sh --print-python > "$RUNNER_TEMP/qd-python"
@@ -50,6 +49,13 @@ jobs:
           security default-keychain -d user -s "$RUNNER_TEMP/qd-ci.keychain-db"
           security unlock-keychain -p "$test_password" "$RUNNER_TEMP/qd-ci.keychain-db"
           security set-keychain-settings -lut 21600 "$RUNNER_TEMP/qd-ci.keychain-db"
-      - name: Run shared protocol and native macOS tests
+      - name: Run native Keychain test
+        timeout-minutes: 3
         run: |
-          "$(cat "$RUNNER_TEMP/qd-python")" -I -m unittest discover -s plugins/quantdinger-macos/tests -p 'test_*.py' -v
+          "$(cat "$RUNNER_TEMP/qd-python")" -I -m unittest discover -s plugins/quantdinger-macos/tests -p 'test_macos.py' -k native_keychain -v
+      - name: Run shared protocol and Mac bootstrap tests
+        timeout-minutes: 6
+        run: |
+          "$(cat "$RUNNER_TEMP/qd-python")" -I -m unittest discover -s plugins/quantdinger-macos/tests -p 'test_connector.py' -v
+          "$(cat "$RUNNER_TEMP/qd-python")" -I -m unittest discover -s plugins/quantdinger-macos/tests -p 'test_macos.py' -k application_support -v
+          "$(cat "$RUNNER_TEMP/qd-python")" -I -m unittest discover -s plugins/quantdinger-macos/tests -p 'test_macos.py' -k cold_launch -v

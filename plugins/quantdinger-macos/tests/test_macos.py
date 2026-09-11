@@ -1,5 +1,6 @@
 """macOS launcher, warm-start and native Keychain checks on real Mac runners."""
 import asyncio
+import faulthandler
 from datetime import timedelta
 from http.server import ThreadingHTTPServer
 import json
@@ -24,6 +25,10 @@ PLUGIN = Path(__file__).resolve().parents[1]
 
 @unittest.skipUnless(sys.platform == "darwin", "macOS runner required")
 class MacTests(unittest.IsolatedAsyncioTestCase):
+    async def asyncSetUp(self):
+        faulthandler.dump_traceback_later(90, repeat=True)
+        self.addCleanup(faulthandler.cancel_dump_traceback_later)
+
     async def test_native_keychain_roundtrip(self):
         from keyring.backends.macOS import Keyring
         vault = Keyring()
@@ -58,16 +63,25 @@ class MacTests(unittest.IsolatedAsyncioTestCase):
                    "PYTHONHOME": "/nonexistent/poison", "PYTHONPATH": "/nonexistent/poison"}
             settings = root / "Library/Application Support/QuantDinger/Connector/config.json"
             definition = json.loads((checkout / ".mcp.json").read_text())["mcpServers"]["quantdinger"]
+            boot = await asyncio.to_thread(subprocess.run,
+                ["/bin/bash", str(checkout / "scripts/launch-quantdinger.sh"), "--print-python"],
+                env=env, text=True, capture_output=True, timeout=180)
+            self.assertEqual(boot.returncode, 0, boot.stderr)
+            test_python = boot.stdout.strip()
+            self.assertTrue(Path(test_python).is_file())
+            print("Mac cold bootstrap completed in a fresh Unicode home", flush=True)
             params = StdioServerParameters(command=definition["command"], args=definition["args"],
                                           cwd=str(checkout), env=env)
             try:
                 with (root / "protocol-errors.log").open("w+") as errors:
                     async with stdio_client(params, errlog=errors) as (read, write):
-                        async with ClientSession(read, write, read_timeout_seconds=timedelta(seconds=600)) as session:
+                        async with ClientSession(read, write, read_timeout_seconds=timedelta(seconds=120)) as session:
                             await session.initialize()
+                            print("Mac MCP initialized", flush=True)
                             self.assertEqual(len((await session.list_tools()).tools), 60)
                             self.assertEqual(server.requests, [])
                             for token, identity in ((TOKEN_A, 101), (TOKEN_B, 202)):
+                                print(f"Checking native-vault connection for fixture identity {identity}", flush=True)
                                 response = await session.call_tool("connect_quantdinger", {"agent_token": token})
                                 self.assertFalse(response.isError, data(response))
                                 accounts.add(json.loads(settings.read_text())["credential_account"])
@@ -75,6 +89,7 @@ class MacTests(unittest.IsolatedAsyncioTestCase):
                             rejected = await session.call_tool("connect_quantdinger", {"agent_token": TOKEN_BAD})
                             self.assertTrue(rejected.isError)
                             self.assertEqual(data(await session.call_tool("whoami", {}))["user_id"], 202)
+                            print("Mac credential rotation and rejected replacement verified", flush=True)
                     errors.flush()
                     output = (root / "protocol-errors.log").read_text()
                     for token in (TOKEN_A, TOKEN_B, TOKEN_BAD):
@@ -88,8 +103,11 @@ class MacTests(unittest.IsolatedAsyncioTestCase):
                 self.assertTrue(Path(warm.stdout.strip()).is_file())
                 self.assertTrue(all(method == "GET" for method, _, _ in server.requests))
             finally:
-                for account in accounts:
-                    connector.keyring.delete_password(connector.SECRET_SERVICE, account)
+                if accounts:
+                    cleanup = subprocess.run([test_python, "-I", "-c",
+                        "import json,keyring,sys; [keyring.delete_password('QuantDinger Connector', account) for account in json.load(sys.stdin)]"],
+                        input=json.dumps(sorted(accounts)), text=True, capture_output=True, timeout=30)
+                    self.assertEqual(cleanup.returncode, 0, cleanup.stderr)
 
 
 if __name__ == "__main__":

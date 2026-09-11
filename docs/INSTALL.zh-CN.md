@@ -40,7 +40,7 @@ codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
 codex plugin add quantdinger-macos@quantdinger
 ```
 
-选择 **QuantDinger for Mac**，不要安装 Windows 入口。启动器支持 Apple Silicon（`arm64`）和 Intel（`x86_64`），你使用的 Codex 客户端本身也必须支持这台 Mac。这是 Mac 桌面端／CLI 集成，不是 iOS 应用。
+选择 **QuantDinger for Mac**，不要安装 Windows 入口。本版支持 **Apple Silicon（`arm64`，M 系列）**。暂不支持 Intel Mac：当前加密依赖没有提供官方 Intel macOS 安装包。请使用原生 arm64 终端和 Codex 客户端，不要通过 Rosetta 运行。这是 Mac 桌面端／CLI 集成，不是 iOS 应用。
 
 首次启动需要联网：uv 会下载独立的 Python 3.13，并按固定版本和文件哈希安装依赖，可能需要几分钟。后续启动复用环境；查询行情和调用云端功能仍需要网络。
 
@@ -144,6 +144,7 @@ codex plugin remove quantdinger-macos@quantdinger
 | 找不到 `codex` 或 `plugin` 命令 | 安装／更新 Codex CLI，重新打开终端，确认客户端支持插件。 |
 | 安装后在应用中看不到 | 检查系统用户和配置目录是否相同，新建任务，确认插件源及平台入口；必要时重启应用刷新。 |
 | Mac 尝试执行 `cmd.exe` | 移除 Windows 入口，改装 `quantdinger-macos@quantdinger`。 |
+| `apple_silicon_required` | 使用 M 系列 Mac 和原生 arm64 终端／客户端。本版暂不支持 Intel Mac。 |
 | `uv_required` | 按上方官方方式安装 uv；启动器会检查常见用户目录及 Homebrew 路径。 |
 | Mac 首次启动超时 | 检查 Python 下载源和 PyPI 网络连通性，再重试。已完成的环境会复用；不完整的环境会隔离后重建。 |
 | Mac 凭据保存失败 | 解锁登录钥匙串，检查对应的访问提示；不要关闭钥匙串保护。 |

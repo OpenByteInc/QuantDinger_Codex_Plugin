@@ -43,7 +43,7 @@ codex plugin marketplace add OpenByteInc/quantdinger-codex-plugin
 codex plugin add quantdinger-macos@quantdinger
 ```
 
-Mac 启动器支持 Apple Silicon 和 Intel 运行环境，使用的 Codex 客户端也需要支持对应电脑。首次启动会下载独立 Python 3.13 和经过哈希锁定的依赖，**请保持联网并等待初始化完成**。后续启动复用环境。
+支持 **Apple Silicon（M 系列）Mac**，本版暂不支持 Intel Mac。首次启动会下载独立 Python 3.13 和经过哈希锁定的依赖，**请保持联网并等待初始化完成**。后续启动复用环境。
 
 > **装好了？** 新建一个 **Codex 任务**，输入 `@`，选择 **QuantDinger**（Windows）或 **QuantDinger for Mac**。也可以打开详情，点击 **“立即试用 / Try now”**。
 
@@ -60,7 +60,7 @@ Mac 启动器支持 Apple Silicon 和 Intel 运行环境，使用的 Codex 客�
 
 **成功标志：** 返回 `connected`，账户和权限已验证。随后可以直接在同一对话中继续，连接账户不会启动交易。
 
-Mac 首次使用可能弹出钥匙串访问提示，请确认请求来自刚安装的 QuantDinger 运行环境。Token 的本地副本保存到系统凭据库；在聊天中输入的 Token 也会进入对话和工具历史。不希望这样保存，可以使用[终端隐藏输入](docs/INSTALL.zh-CN.md#不在聊天中输入-token)。
+Mac 首次使用可能弹出钥匙串访问提示，请确认请求来自刚安装的 QuantDinger 运行环境。Token 的本地副本保存到系统凭据库；在聊天中输入的 Token 也会进入对话和工具历史。不希望这样保存，可以使用[终端隐藏输入](docs/INSTALL.zh-CN.md#不想把-token-发到聊天里)。
 
 ## 3. 完成第一次回测
 

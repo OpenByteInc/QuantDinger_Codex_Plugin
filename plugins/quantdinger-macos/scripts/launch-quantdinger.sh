@@ -8,7 +8,10 @@ if [[ "$(uname -s)" != Darwin ]]; then
   exit 2
 fi
 architecture="$(uname -m)"
-case "$architecture" in arm64|x86_64) ;; *) exit 2 ;; esac
+if [[ "$architecture" != arm64 ]]; then
+  printf '%s\n' 'apple_silicon_required: use an arm64 terminal and Codex client' >&2
+  exit 2
+fi
 unset PYTHONHOME PYTHONPATH VIRTUAL_ENV CONDA_PREFIX
 unset UV_INDEX_URL UV_EXTRA_INDEX_URL UV_DEFAULT_INDEX UV_INDEX
 

@@ -50,11 +50,11 @@ qd_python="$(/bin/bash plugins/quantdinger-macos/scripts/launch-quantdinger.sh -
 "$qd_python" -I -m unittest discover -s plugins/quantdinger-macos/tests -p 'test_*.py' -v
 ```
 
-CI runs on Apple Silicon (`macos-15`) and Intel (`macos-15-intel`). Tests cover the shared MCP protocol, native Keychain set/get/update/delete, cold setup in a path with spaces and Unicode, credential rotation, and a warm launch with unavailable network proxies. CI creates a disposable default keychain on the ephemeral runner; do not copy that CI setup into user onboarding. These are real macOS runtime tests, not a manual Codex desktop UI certification.
+CI runs on Apple Silicon (`macos-15`). Tests cover the shared MCP protocol, native Keychain set/get/update/delete, cold setup in a path with spaces and Unicode, credential rotation, and a warm launch with unavailable network proxies. CI creates a disposable default keychain on the ephemeral runner; do not copy that CI setup into user onboarding. These are real macOS runtime tests, not a manual Codex desktop UI certification. Intel was tested during development and rejected because cryptography 50.0.1 has no official Intel macOS wheel; the launcher now rejects that architecture before downloading anything.
 
 The canonical connector, tool definitions, workflow skills and assets live in the Windows entry. After changing them, run `python scripts/sync_macos_plugin.py`; validation enforces byte parity with the Mac entry. Native launchers and platform tests remain separate.
 
-To intentionally update Mac dependencies, update/review the canonical pins, then run `python scripts/lock_macos_dependencies.py`. This queries PyPI for compatible macOS/universal wheel hashes and omits Windows-only packages. Review and commit the resulting lock; installation uses `--require-hashes --only-binary :all:`. Python is constrained to managed 3.13, with the patch version selected by uv. Repeat both architecture tests after any lock or launcher change.
+To intentionally update Mac dependencies, update/review the canonical pins, then run `python scripts/lock_macos_dependencies.py`. This queries PyPI for compatible macOS/universal wheel hashes and omits Windows-only packages. Review and commit the resulting lock; installation uses `--require-hashes --only-binary :all:`. Python is constrained to managed 3.13, with the patch version selected by uv. Repeat macOS tests after any lock or launcher change.
 
 ## Rebuild the Windows runtime
 
